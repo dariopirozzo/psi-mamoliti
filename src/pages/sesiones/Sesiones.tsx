@@ -112,7 +112,7 @@ const Sesiones: React.FC = () => {
                               </button>
                             </div>
                             <div className="modal-body">
-                              <Calendar professional={profesionalSeleccionado} teraphy={tipoSesion}/>
+                              <Calendar professional={profesionalSeleccionado!} teraphy={tipoSesion}/>
                             </div>
                           </div>
                         </div>

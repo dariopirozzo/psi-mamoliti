@@ -11,7 +11,7 @@ interface CalendarProps {
   teraphy: string;
 }
 
-const Calendar: React.FC<CalendarProps>  = ({professional,teraphy}) => {
+const Calendar: React.FC<CalendarProps>  = ({professional,teraphy}:CalendarProps) => {
 
   const [date, setDate] = useState<Date>(new Date());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
