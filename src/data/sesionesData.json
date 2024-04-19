@@ -1,0 +1,4 @@
+[
+  { "id": 1, "tipo": "Terapia Individual", "profesional": "Maria Camila Lopez" },
+  { "id": 2, "tipo": "Terapia Grupal", "profesional": "Josefina Sanchez" }
+]

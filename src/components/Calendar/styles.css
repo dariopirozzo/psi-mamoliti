@@ -1,0 +1,55 @@
+.calendar {
+  font-family: Arial, sans-serif;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  border: 1px solid #ccc;
+}
+
+.empty {
+  height: 30px;
+}
+
+.available {
+  background-color: #f0ebfa; 
+}
+
+.unavailable {
+  background-color: #f97583; 
+}
+.hour{
+  padding: 10px 10px;
+  width: 58px;
+}
+.selected{
+  background-color: aquamarine;
+}
