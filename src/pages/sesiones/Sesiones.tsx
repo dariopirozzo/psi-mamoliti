@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Calendar from '../../components/Calendar/Calendar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
+import availableDays from '../../data/availableDays';
+import unavailableDays from '../../data/unavailableDays';
 interface Sesion {
   id: number;
   tipo: string;
@@ -12,7 +14,7 @@ const Sesiones: React.FC = () => {
   const navigate = useNavigate();
   const [tipoSesion, setTipoSesion] = useState<string>("Terapia Individual");
   const [sesiones, setSesiones] = useState<Sesion[]>([]);
-  const [showCalendar , setShowCalendar ] = useState(false)
+  const [showToast , setShowToast ] = useState(false)
 
   const turnInfo = useSelector((state: RootState) => state.turnoInfoSlice.data)
   
@@ -45,7 +47,15 @@ const Sesiones: React.FC = () => {
   };
 
   const handleAgendarSesion = () => {
-    setShowCalendar(true)
+    if(turnInfo.turn !== '' ){
+      const turn = {
+        profesionalSeleccionado: profesionalSeleccionado,
+        terapia: tipoSesion,
+        tuno: turnInfo.turn
+      }
+      setShowToast(true)
+      console.log(turn) // en este caso es un console log, pero puede ser una funcion que envie los datos algun endpoint
+    }
   };
 
   // Función para manejar el cambio en el tipo de sesión seleccionado
@@ -94,16 +104,18 @@ const Sesiones: React.FC = () => {
               <div className="form-group">
                 <label htmlFor="fechaTurno">Fecha del Turno:</label>
                 <input
-                  type="text"
+                  type="button"
                   className="form-control rounded-pill"
+                  style={{ textAlign: 'start' }}
+                  data-toggle="modal" 
+                  data-target="#exampleModal"
                   id="fechaTurno"
                   value={turnInfo.turn === '' ? '' : turnInfo.turn } // Aquí debes proporcionar la fecha del turno
                   readOnly
                 />
               </div>
               <div className="text-center mt-3">
-                <button className="btn rounded-pill text-white px-4" style={{ backgroundColor: '#563d7c' }} onClick={handleAgendarSesion} type="button" data-toggle="modal" data-target="#exampleModal">Agendar Sesión</button>
-                {showCalendar && <div className="modal" role="dialog" id="exampleModal">
+                     <div className="modal" role="dialog" id="exampleModal">
                         <div className="modal-dialog modal-dialog-centered" role="document">
                           <div className="modal-content">
                             <div className="modal-header">
@@ -112,11 +124,22 @@ const Sesiones: React.FC = () => {
                               </button>
                             </div>
                             <div className="modal-body">
-                              <Calendar professional={profesionalSeleccionado!} teraphy={tipoSesion}/>
+                              <Calendar 
+                              professional={profesionalSeleccionado!} 
+                              teraphy={tipoSesion}
+                              availableDays={availableDays}
+                              unavailableDays={unavailableDays}/>
                             </div>
                           </div>
                         </div>
-                      </div>}
+                      </div>
+                      {
+                          showToast && 
+                          <div className="alert alert-success" role="alert">
+                                Turno Agendado
+                          </div>
+                      }
+                      <button className="btn rounded-pill text-white px-4" style={{ backgroundColor: '#563d7c' }} onClick={handleAgendarSesion} disabled={turnInfo.turn === ''}>Agendar Sesión</button>
               </div>
             </div>
           </div>
