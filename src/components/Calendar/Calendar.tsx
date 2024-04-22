@@ -16,7 +16,6 @@ const Calendar: React.FC<CalendarProps> = ({ professional, teraphy, availableDay
   const [selectedMonth, setSelectedMonth] = useState<number>(date.getMonth());
   const [selectedYear, setSelectedYear] = useState<number>(date.getFullYear());
   const [selectedHour, setSelectedHour] = useState<string | null>(null);
-  const [validTurn, setValidTurn] = useState(false);
   const dispatch = useDispatch();
 
   const nextMonth = () => {
